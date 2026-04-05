@@ -60,8 +60,17 @@
 | Started | Date |
 | Last Touched | Date |
 
-## Notion DB IDs
-> /setup 실행 후 Claude 메모리(reference)에 저장됨. 메모리에서 자동 로드.
+## 부트스트랩 (어디서든 동작하기 위한 핵심)
+Notion이 유일한 진실의 원천. Claude 메모리는 캐시일 뿐.
+
+### 세션 시작 시 DB ID 확보 순서:
+1. Claude 메모리에서 "life-hack-db-ids" 검색 → 있으면 사용 (캐시)
+2. 없으면: notion-search(query="Life Hack System Config") → System Config 페이지 fetch → ID 추출
+3. System Config도 없으면: /setup 필요 안내
+
+### System Config 페이지 (Notion)
+/setup 시 자동 생성. 모든 DB ID, Calendar ID, PULSE 관찰 지침, 사용자 설정 저장.
+이 페이지가 있으면 어떤 기기에서든 시스템 전체를 복원할 수 있음.
 
 ## DIALOGUE 모드 규칙
 세션 첫 대화 시 (응답 전에 실행):
@@ -91,17 +100,18 @@
 - Relation 설정: create 후 update로 분리 필요할 수 있음 (런타임 테스트)
 - Hook은 MCP 호출 불가 — 텍스트 리마인더만
 
-## 메모리 정책
-| 데이터 | Claude 메모리 | Notion |
+## 데이터 정책 — Notion이 유일한 진실의 원천
+| 데이터 | Notion (진실) | Claude 메모리 (캐시) |
 |--------|:---:|:---:|
-| 정체성 프로필 요약 | ✅ | ❌ |
-| 사용자 선호 (톤, 형식) | ✅ | ❌ |
-| DB/Calendar ID | ✅ (reference) | ❌ |
-| PULSE 관찰 지침 | ✅ | ❌ |
-| 일일 로그/인사이트/목표 | ❌ | ✅ |
+| DB/Calendar ID | System Config 페이지 | 캐시 (없어도 됨) |
+| 정체성 프로필 | Identity Profile 페이지 | 캐시 (없어도 됨) |
+| PULSE 관찰 지침 | System Config 페이지 | 캐시 (없어도 됨) |
+| 사용자 설정 | System Config 페이지 | 캐시 (없어도 됨) |
+| 일일 로그/인사이트/목표 | 각 DB | 저장 안 함 |
 
-- 월간 PULSE 시 Claude 메모리를 Notion 최신 상태로 동기화
-- Notion = 진실의 원천. 메모리와 충돌 시 Notion 우선.
+- **어떤 기기에서든**: 레포 클론 → /setup → Notion에서 System Config 검색 → 자동 재연결
+- Claude 메모리는 속도 최적화용 캐시. 없으면 Notion에서 다시 읽음.
+- 메모리와 Notion 충돌 시 항상 Notion 우선.
 
 ## 커맨드 목록
 | 커맨드 | 용도 |

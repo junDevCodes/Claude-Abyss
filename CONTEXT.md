@@ -64,17 +64,20 @@
 확인:     /review → 상태 확인 + 회고
 ```
 
-## Notion이 맥락 허브
-이 시스템의 모든 런타임 상태는 Notion에 저장됩니다.
-레포를 클론한 후 /setup으로 동일한 Notion 워크스페이스에 연결하면,
-이전 대화(Abyss)의 결과, 축적된 인사이트, 목표, 정체성 프로필 전부를
-새 세션에서 이어갈 수 있습니다.
+## Notion이 유일한 진실의 원천
+모든 런타임 상태, DB ID, 설정, 정체성 프로필이 Notion에 저장됩니다.
+Claude 메모리는 속도 최적화용 캐시일 뿐, 없어도 시스템이 동작합니다.
 
-기존 Notion DB가 있다면:
-1. 새 세션에서 CONTEXT.md와 CLAUDE.md 읽기
-2. Claude 메모리에서 DB ID 자동 로드
-3. /review today로 현재 상태 확인
-4. 바로 /daily, /pulse, 대화 가능
+### 어떤 기기에서든 이어가기:
+1. 레포 클론 → `claude` → `/setup`
+2. /setup이 Notion에서 "Life Hack System Config" 검색
+3. 찾으면 → 자동 재연결 (DB 생성 스킵)
+4. /review today로 현재 상태 확인 → 바로 사용
+
+### 핵심 Notion 페이지:
+- **System Config**: 모든 DB ID, Calendar ID, PULSE 관찰 지침, 사용자 설정
+- **Identity Profile**: Abyss + 월간 PULSE가 업데이트하는 정체성 문서
+- **Daily Log / Insights / Goals**: 3개 DB에 모든 구조화 데이터
 
 ## 파일 구조 (최종)
 ```

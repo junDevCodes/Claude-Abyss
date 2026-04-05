@@ -1,8 +1,21 @@
-# /setup — Life Hack 초기 세팅
+# /setup — Life Hack 초기 세팅 + 재연결
 
-최초 1회 실행. Notion DB 생성, 뷰 설정, Calendar 연결, 메모리 저장.
+## Step 0: 기존 시스템 감지 (재연결 플로우)
+먼저 기존 Notion 시스템이 있는지 확인:
+```
+notion-search(query="Life Hack System Config", filters={}, page_size=5)
+```
+- **찾으면** → 재연결 모드:
+  1. System Config 페이지 fetch → 모든 ID 추출
+  2. 각 DB fetch로 접근 확인
+  3. Claude 메모리에 캐시 저장
+  4. "기존 시스템에 재연결 완료! 데이터 N일치 확인됨." 표시
+  5. 종료 (Step 1~8 스킵)
+- **못 찾으면** → 신규 설치 모드: Step 1부터 진행
 
-## Step 1: Notion 부모 페이지 확인
+---
+
+## Step 1: Notion 부모 페이지 확인 (신규 설치)
 사용자에게: "Life Hack 시스템을 만들 Notion 페이지 URL 또는 ID를 알려주세요."
 - notion-fetch(id=사용자입력)으로 접근 확인
 - page_id 추출
@@ -174,27 +187,34 @@ gcal_create_event(
 )
 ```
 
-## Step 7: Claude 메모리에 저장
-Write tool로 메모리 파일 생성:
+## Step 7: System Config 페이지 생성 (Notion — 진실의 원천)
+모든 시스템 ID와 설정을 Notion에 저장. 어떤 기기에서든 이 페이지로 시스템 복원 가능.
+```
+notion-create-pages(
+  parent: {page_id: "PARENT_PAGE_ID"},
+  pages: [{
+    properties: {"title": "Life Hack System Config"},
+    icon: "⚙️",
+    content: "## Database IDs\n- Daily Log DB: [database_id]\n- Daily Log DS: collection://[data_source_id]\n- Insights DB: [database_id]\n- Insights DS: collection://[data_source_id]\n- Goals DB: [database_id]\n- Goals DS: collection://[data_source_id]\n- Identity Profile Page: [page_id]\n- Parent Page: [parent_page_id]\n\n## Google Calendar\n- Primary Calendar: [calendar_id]\n\n## PULSE 관찰 지침\n(Abyss 실행 후 자동 업데이트)\n\n## 사용자 설정\n- Timezone: Asia/Seoul\n- 일일 리포트 시간: 23:30\n- PULSE 톤: 상황 적응형\n\n## 시스템 버전\n- 설치일: YYYY-MM-DD\n- 마지막 /pulse monthly: (미실행)"
+  }]
+)
+```
+
+## Step 8: Claude 메모리에 캐시 (선택, 속도 최적화)
+Claude 메모리는 **캐시**일 뿐. 없어도 Step 0에서 Notion으로 복원 가능.
 ```
 파일: ~/.claude/projects/<project>/memory/life-hack-db-ids.md
 ---
 name: life-hack-db-ids
 type: reference
-description: Life Hack 시스템의 Notion DB ID와 Calendar ID
+description: Life Hack DB ID 캐시 (Notion System Config가 진실의 원천)
 ---
-- Daily Log DB: [database_id]
-- Daily Log DS: collection://[data_source_id]
-- Insights DB: [database_id]  
-- Insights DS: collection://[data_source_id]
-- Goals DB: [database_id]
-- Goals DS: collection://[data_source_id]
-- Identity Profile Page: [page_id]
-- Primary Calendar: [calendar_id]
+(System Config 페이지 내용 복사)
 ```
-MEMORY.md 인덱스에도 추가.
 
-## Step 8: 완료
+## Step 9: 완료
 "셋업 완료! 다음 중 선택:
 - /abyss — 심연 탐색 시작 (45-60분, 추천)
-- /daily — 일일 기록 시작 (30초)"
+- /daily — 일일 기록 시작 (30초)
+
+다른 기기에서도 이 레포를 클론하고 /setup 하면 자동으로 기존 시스템에 재연결됩니다."

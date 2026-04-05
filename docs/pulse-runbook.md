@@ -211,8 +211,26 @@ Claude 메모리에 "이번 달 프레임: [X]" 저장.
 #### 5. 메모리 동기화
 정체성 프로필 요약을 Claude 메모리에 반영. 구 메모리 항목 제거/수정.
 
-#### 6. 예측 검증
+#### 6. 예측 검증 (Abyss 포함)
 지난달 Hypothesis → 이번 달 데이터로 확인/기각.
+
+**Abyss 행동 예측 검증** (Abyss 실행 30일 후):
+- Insights DB에서 Type="Prediction" 항목 검색
+- 각 예측의 성공/실패 기준을 Daily Log 데이터와 대조
+- 적중률 계산: N/총예측수
+- 결과:
+  - 60%+ 적중 → Abyss가 실제 패턴을 잡았음. Confirmed로 승격.
+  - 40-60% → 부분적. Emerging 유지. 방향은 맞으나 세부 조정 필요.
+  - 40% 미만 → Abyss가 잘못 짚음. 해당 인사이트 Superseded 처리.
+    → /abyss 재실행 또는 질문 방법론 수정 고려.
+
+#### 7. 시스템 자기 검증 (메타 메트릭)
+매월 기록 (Insights DB에 Type="Trend", Tags="Meta"):
+- Daily Log 엔트리 수 (Manual vs Ghost)
+- 인사이트 Confidence 분포
+- 인사이트 무시율 (Status=New가 14일 이상 유지된 비율)
+- 행동 예측 적중률 (있는 경우)
+→ 시스템 자체의 유효성을 장기 추적.
 
 ### 월간 리포트 형식
 ```

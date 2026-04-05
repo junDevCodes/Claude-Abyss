@@ -1,0 +1,20 @@
+# Claude Code
+.claude/settings.local.json
+
+# Reference codebases (submodules or separate)
+claude-code-main/
+advanced-harness-window/
+
+# Claude Code internal docs (reference only, not part of system)
+docs/part01_agent_tool_system.md
+docs/part02_bash_security_system.md
+docs/part03_memory_skill_mcp.md
+docs/part04_swarm_bridge_core.md
+docs/part05_utils_plugins_misc.md
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Session cache
+.claude/life-hack-session-cache/

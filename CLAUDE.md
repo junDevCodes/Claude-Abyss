@@ -23,14 +23,18 @@
 | Property | Type |
 |----------|------|
 | Date | Date |
-| Study Flags | Multi-select |
-| Exercise | Select: None/Light/Full |
-| Sleep Time | Text |
-| Wake Time | Text |
+| Meals | Rich Text (아/점/저/야) |
+| Activities | Rich Text (자유 텍스트 — PULSE가 자동 분류) |
+| Exercise | Rich Text (종목+세트 상세) |
+| Gaming | Rich Text (종류+판수) |
+| Sleep Time | Text (취침) |
+| Wake Time | Text (기상) |
 | Mood | Number (1-5) |
 | Energy | Number (1-5) |
 | Approached | Rich Text |
 | Avoided | Rich Text |
+| Social | Select: Alone/Small/Group |
+| Challenge | Number (1-5, 오늘의 도전 수준) |
 | Freeform | Rich Text |
 | Plan-Reality Gap | Rich Text (PULSE 자동) |
 | Source | Select: Manual/Auto/Ghost |
@@ -39,13 +43,13 @@
 | Property | Type |
 |----------|------|
 | Date | Date |
-| Type | Select: Pattern/Contradiction/Trend/Identity Signal |
-| Horizon | Select: Daily/Weekly/Monthly |
+| Type | Select: Pattern/Contradiction/Trend/Identity Signal/Prediction |
+| Horizon | Select: Daily/Weekly/Monthly/Quarterly |
 | Content | Rich Text (요약 500자 이내, 상세는 페이지 본문) |
 | Evidence | Relation → Daily Log |
-| Confidence | Select: Hypothesis/Emerging/Confirmed |
+| Confidence | Select: Hypothesis/Emerging/Confirmed/Disconfirmed |
 | Status | Select: New/Acknowledged/ActingOn/Superseded |
-| Tags | Multi-select |
+| Tags | Multi-select: Identity/Energy/Health/Study/Social/Career/Tech/Market/Industry/AI/Meta |
 
 ### Goals & Direction
 | Property | Type |

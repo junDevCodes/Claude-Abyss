@@ -124,7 +124,22 @@ Goals DB Active 목표 vs Daily Log 실제 행동:
 - Freeform 긍정 표현이지만 투자 시간 미미 → Contradiction
 - 가능성 복수 제시, 질문으로 끝냄 (단정 금지)
 
-#### 5. Confidence 승격
+#### 5. Mood-Activity 상관 (핵심 분석)
+어떤 활동이 Mood=4-5를 만드는가? 어떤 활동이 Mood=1-2를 만드는가?
+Activities 필드의 자유텍스트에서 활동 추출 → Mood 교차.
+→ 이것이 "무엇을 좋아하는가"의 가장 직접적인 데이터.
+
+#### 6. 접근/회피 궤적 (변화 추적)
+이번 주 TOP 3와 지난주 TOP 3 비교.
+새로 등장한 접근 = 관심 신호. 사라진 접근 = 포기/포화 신호.
+정적 랭킹이 아니라 변화 방향이 핵심.
+
+#### 7. Layer 1 마이크로 스캔 (WebSearch 2-3회)
+Identity Profile에서 관심 키워드 추출 → 주간 뉴스/동향 검색.
+교차: "이번 주 네 몰입과 관련된 세상 움직임"
+교차점 있을 때만 Insights DB에 Type="Trend" 기록.
+
+#### 8. Confidence 승격
 기존 Hypothesis가 3주+ 반복 → notion-update-page로 Emerging 변경.
 기존 Emerging이 사용자 검증됨 → Confirmed 변경.
 
@@ -173,12 +188,31 @@ notion-create-pages(
 
 ## Monthly PULSE
 
-### MCP 호출 시퀀스 (8-12회)
+### MCP 호출 시퀀스 (12-20회)
 ```
 1-2. notion-search(INSIGHTS_DS, 30일, page_size=25) × 1-2회
 3.   notion-search(GOALS_DS, page_size=25)
 4.   notion-fetch(IDENTITY_PROFILE_PAGE_ID)
-5-6. WebSearch × 1-2회 (관련 트렌드)
+5.   docs/life_design.md 읽기 (삶의 맥락 참조)
+
+Layer 1 스캔 (WebSearch 5-6회, 매월 필수):
+6.   Identity Profile에서 관심 키워드 추출
+7.   "[키워드] 기술 트렌드 2026" (예: "임베디드 AI TinyML 트렌드")
+8.   "[키워드] 채용 시장 한국" (예: "IoT 스마트팩토리 채용")
+9.   "AI 대체 어려운 개발 영역 2026"
+10.  "주니어 개발자 [관심분야] 진입 경로"
+11.  "[관심분야] 요구 기술 스택"
+
+Layer 2 스캔 (WebSearch 3-4회, 매월):
+12.  "IT 스타트업 투자 트렌드 한국 2026"
+13.  "[관심분야] 산업 성장 전망"
+14.  "원격근무 개발자 트렌드 한국"
+
+Layer 3 스캔 (WebSearch 3-5회, 분기=3,6,9,12월만):
+15.  "한국 경제 전망 [년도]"
+16.  "AI 규제 동향"
+17.  "개발자 인력 수급 전망"
+18.  "신기술 돌파구 (양자, 바이오, RISC-V 등)"
 7.   notion-update-page(IDENTITY_PROFILE, "replace_content", 새 프로필)
 8-9. notion-update-page(Goals, Trend Context 업데이트) × 필요한 목표 수
 10.  notion-create-pages(INSIGHTS_DS, 월간 인사이트)

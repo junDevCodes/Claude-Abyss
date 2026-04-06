@@ -212,9 +212,28 @@ description: Life Hack DB ID 캐시 (Notion System Config가 진실의 원천)
 (System Config 페이지 내용 복사)
 ```
 
-## Step 9: 완료
-"셋업 완료! 다음 중 선택:
+## Step 9: System Status 페이지 생성
+```
+notion-create-pages(
+  parent: {page_id: "PARENT_PAGE_ID"},
+  pages: [{
+    properties: {"title": "Life Hack System Status"},
+    icon: "📊",
+    content: "(초기 상태 — /verify에서 자동 채워짐)"
+  }]
+)
+```
+
+## Step 10: 자동 검증 실행
+/verify를 자동 실행하여 전체 시스템 점검.
+결과가 System Status 페이지에 기록됨.
+사용자는 Notion 앱에서 이 페이지만 확인하면 됨.
+
+## Step 11: 완료
+"셋업 + 검증 완료! Notion 'System Status' 페이지에서 결과 확인 가능.
+
+다음 단계:
 - /abyss — 심연 탐색 시작 (45-60분, 추천)
-- /daily — 일일 기록 시작 (30초)
+- /daily — 일일 기록 시작
 
 다른 기기에서도 이 레포를 클론하고 /setup 하면 자동으로 기존 시스템에 재연결됩니다."

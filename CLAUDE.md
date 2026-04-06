@@ -157,12 +157,17 @@ Notion이 유일한 진실의 원천. Claude 메모리는 캐시일 뿐.
 - Claude 메모리는 속도 최적화용 캐시. 없으면 Notion에서 다시 읽음.
 - 메모리와 Notion 충돌 시 항상 Notion 우선.
 
+## 커맨드 실행 후 자동 동작
+모든 커맨드 성공/실패 시 Notion "System Status" 페이지 자동 업데이트.
+사용자가 CMD에서 확인할 필요 없이 Notion 앱에서 한 페이지만 보면 됨.
+
 ## 커맨드 목록
 | 커맨드 | 용도 |
 |--------|------|
-| `/setup` | 초기 세팅 (DB 생성, 뷰 생성, Calendar 연결) |
-| `/abyss` | 심연 탐색 시작 (1회성, 45-60분) |
-| `/daily` | 일일 리포트 제출 (30초, 단일 자유입력) |
-| `/pulse [daily\|weekly\|monthly]` | PULSE 분석 실행 |
+| `/setup` | 초기 세팅 + 자동 검증 (DB, 뷰, Calendar, System Status) |
+| `/verify` | 전체 시스템 점검 → 결과를 Notion System Status에 기록 |
+| `/abyss` | 심연 탐색 시작 (45-60분) |
+| `/daily` | Calendar 교차 검증 + 마무리 대화 (2-5분) |
+| `/pulse [daily\|weekly\|monthly]` | PULSE 분석 + 무의식 추론 |
 | `/review [today\|week\|month]` | 상태 확인 + 회고 |
 | `/goals` | 목표 관리 (조회/추가/수정) |

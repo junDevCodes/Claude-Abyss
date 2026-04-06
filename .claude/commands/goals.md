@@ -2,11 +2,23 @@
 
 $ARGUMENTS: list | add | update | seed (기본값: list)
 
-## seed (초기 자동 세팅)
-Goals DB가 비어있을 때 사용. 사용자에게 하나씩 묻지 않는다.
-1. docs/life_design.md 읽기 (Read tool)
-2. Notion Insights DB에서 Abyss 결과 (Identity Signal) 읽기
-3. life_design.md의 Phase 1/2/3 + Abyss 인사이트 기반으로 Goals 자동 생성:
+## seed (초기 탐색 목표 세팅)
+Goals DB가 비어있을 때 사용. 확정이 아니라 **탐색 실험**.
+
+**원칙:**
+- life_design.md는 참고만. 맹신 금지. 틀렸을 수 있음.
+- Abyss 결과 (Insights DB)가 1순위 근거.
+- 사용자가 **지금 실제로 하고 있는 것** (Calendar 이벤트)이 2순위 근거.
+- 세 소스를 종합하되, 불일치가 있으면 사용자에게 물어본다.
+- 모든 목표는 Status="Exploring". 데이터가 쌓여야 Active로 승격.
+- PULSE weekly가 2주 후 행동 데이터 기반으로 Goals 재평가.
+
+**프로세스:**
+1. Notion Insights DB에서 Abyss Identity Signal 읽기 (1순위)
+2. Calendar에서 현재 반복 이벤트 읽기 → "실제로 하고 있는 것" (2순위)
+3. docs/life_design.md 읽기 (참고, 3순위)
+4. 세 소스 교차 → 일치하는 것은 Exploring으로 등록, 불일치는 사용자에게 질문
+5. 사용자 확인 후 생성:
 
 ```
 notion-create-pages(

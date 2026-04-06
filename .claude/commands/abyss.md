@@ -19,5 +19,6 @@ Phase 0: 심층 대화를 통해 사용자의 진짜 관심사, 무의식적 패
 준비 확인 후 → Agent tool로 .claude/agents/abyss.md 스폰.
 
 ### 에이전트 완료 후
-에이전트가 반환한 요약을 사용자에게 표시.
-Claude 메모리에 정체성 프로필 요약 저장 (type: user).
+1. 에이전트가 반환한 요약을 사용자에게 표시
+2. Notion System Config 페이지의 "PULSE 관찰 지침" 섹션에 Abyss 발견 기반 관찰 포인트 업데이트
+3. Claude 메모리에 정체성 프로필 요약 캐시 (type: user) — 없어도 Notion에서 복원 가능

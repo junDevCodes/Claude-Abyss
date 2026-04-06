@@ -2,6 +2,11 @@
 
 $ARGUMENTS: today | week | month (기본값: today)
 
+## 빈 데이터 처리
+- Daily Log 없는 날: "오늘 기록이 없어. /daily로 기록하거나, 지금 간단히 알려줘."
+- Insights 0개: "아직 인사이트가 없어. 데이터가 쌓이면 패턴이 보이기 시작할 거야."
+- Goals 0개: "목표가 없어. /goals add로 추가할 수 있어."
+
 ## today (기본)
 ### MCP 호출 (3회)
 ```

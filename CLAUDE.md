@@ -161,13 +161,21 @@ Notion이 유일한 진실의 원천. Claude 메모리는 캐시일 뿐.
 모든 커맨드 성공/실패 시 Notion "System Status" 페이지 자동 업데이트.
 사용자가 CMD에서 확인할 필요 없이 Notion 앱에서 한 페이지만 보면 됨.
 
+## 하루 사이클
+```
+아침: /morning → Goals + Calendar 기반 오늘 브리핑 (1분)
+하루: 실행
+밤:  /daily → Calendar 교차 검증 + 마무리 대화 (2-5분)
+```
+
 ## 커맨드 목록
-| 커맨드 | 용도 |
-|--------|------|
-| `/setup` | 초기 세팅 + 자동 검증 (DB, 뷰, Calendar, System Status) |
-| `/verify` | 전체 시스템 점검 → 결과를 Notion System Status에 기록 |
-| `/abyss` | 심연 탐색 시작 (45-60분) |
-| `/daily` | Calendar 교차 검증 + 마무리 대화 (2-5분) |
-| `/pulse [daily\|weekly\|monthly]` | PULSE 분석 + 무의식 추론 |
-| `/review [today\|week\|month]` | 상태 확인 + 회고 |
-| `/goals` | 목표 관리 (조회/추가/수정) |
+| 커맨드 | 시점 | 용도 |
+|--------|------|------|
+| `/setup` | 최초 1회 | 초기 세팅 + 자동 검증 |
+| `/verify` | 필요 시 | 시스템 점검 → Notion System Status 기록 |
+| `/abyss` | 비정기 | 심연 탐색 (45-60분) |
+| `/morning` | 매일 아침 | Goals + Calendar 기반 오늘 브리핑 |
+| `/daily` | 매일 밤 | Calendar 교차 검증 + 마무리 대화 |
+| `/pulse [daily\|weekly\|monthly]` | 주기적 | PULSE 분석 + 무의식 추론 |
+| `/review [today\|week\|month]` | 수시 | 상태 확인 + 회고 |
+| `/goals` | 수시 | 목표 관리 (조회/추가/수정) |

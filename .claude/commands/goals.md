@@ -1,6 +1,44 @@
 # /goals — 목표 관리
 
-$ARGUMENTS: list | add | update (기본값: list)
+$ARGUMENTS: list | add | update | seed (기본값: list)
+
+## seed (초기 자동 세팅)
+Goals DB가 비어있을 때 사용. 사용자에게 하나씩 묻지 않는다.
+1. docs/life_design.md 읽기 (Read tool)
+2. Notion Insights DB에서 Abyss 결과 (Identity Signal) 읽기
+3. life_design.md의 Phase 1/2/3 + Abyss 인사이트 기반으로 Goals 자동 생성:
+
+```
+notion-create-pages(
+  parent: {data_source_id: "GOALS_DS_ID"},
+  pages: [
+    {properties: {"Title": "SSAFY 프로젝트 완수", "Type": "Project", "Status": "Active",
+      "Why": "Phase 1 핵심. 6월 말 종료 전 완수 필요.",
+      "Next Milestone": "2학기 프로젝트 완료", "date:Started:start": "2026-04-01", "date:Last Touched:start": "오늘"}},
+    {properties: {"Title": "알고리즘 주 4문제", "Type": "Skill", "Status": "Active",
+      "Why": "취업 면접 대비. 배열/문자열→해시맵→스택큐→이진탐색 순서.",
+      "Next Milestone": "이번 주 4문제 완료", "date:Started:start": "2026-04-01", "date:Last Touched:start": "오늘"}},
+    {properties: {"Title": "CS 기초 (출근길 영상)", "Type": "Skill", "Status": "Active",
+      "Why": "면접 빈출 주제. 컴구→OS→네트워크→DB→자료구조→웹→디자인패턴.",
+      "Next Milestone": "이번 주 주제 완료", "date:Started:start": "2026-04-01", "date:Last Touched:start": "오늘"}},
+    {properties: {"Title": "임베디드 강의 (주말)", "Type": "Skill", "Status": "Active",
+      "Why": "하드웨어+소프트웨어 접점. 차별화 경쟁력. life_design: '내 손으로 만들어서 작동시키는 것'.",
+      "Next Milestone": "주말 3-5강", "date:Started:start": "2026-04-01", "date:Last Touched:start": "오늘"}},
+    {properties: {"Title": "운동 주 5회 + 감량 90→73kg", "Type": "Habit", "Status": "Active",
+      "Why": "이택민 2분할. 신경 리모델링. 6-8개월 프로젝트.",
+      "Next Milestone": "이번 주 5회 달성", "date:Started:start": "2026-04-01", "date:Last Touched:start": "오늘"}},
+    {properties: {"Title": "취업 준비", "Type": "Career", "Status": "Exploring",
+      "Why": "Phase 2-3. 포트폴리오+이력서+면접. 스마트팩토리/IoT/로보틱스 타겟.",
+      "Next Milestone": "Phase 2 시작 시 이력서 1차 작성", "date:Started:start": "2026-04-01", "date:Last Touched:start": "오늘"}},
+    {properties: {"Title": "임베디드/IoT 방향 탐색", "Type": "Exploration", "Status": "Exploring",
+      "Why": "Abyss + life_design: 물리적 세계+디지털 연결. 현장 경험이 자산.",
+      "Next Milestone": "임베디드 사이드 프로젝트 주제 선정", "date:Started:start": "2026-04-01", "date:Last Touched:start": "오늘"}}
+  ]
+)
+```
+
+4. 사용자에게 결과 표시: "이렇게 세팅했어. 수정할 거 있어?"
+5. 수정 요청 있으면 → update로 처리. 없으면 끝.
 
 ## list (기본)
 ### MCP 호출 (1회)

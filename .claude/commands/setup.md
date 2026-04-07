@@ -96,14 +96,15 @@ notion-create-database(
   schema: "CREATE TABLE (
     \"Topic\" TITLE,
     \"Date\" DATE,
-    \"Subject\" SELECT('Algorithm':blue, 'CS':purple, 'Embedded':green, 'Project':orange, 'Language':yellow, 'Other':gray),
-    \"Tool\" SELECT('Claude':purple, 'Book':blue, 'Video':red, 'Practice':green, 'Lecture':yellow),
+    \"Subject\" SELECT('CS':blue, 'Algorithm':purple, 'Embedded':green, 'Vision':orange, 'Project':yellow, 'Other':gray),
+    \"Tool\" SELECT('Claude':blue, 'ChatGPT':green, 'Gemini':orange, 'Notion':gray, 'Self':default),
     \"Duration\" NUMBER,
     \"Confidence\" NUMBER,
     \"Difficulty\" NUMBER,
-    \"Flow\" NUMBER,
+    \"Flow\" SELECT('Engaged':green, 'Neutral':default, 'Struggled':orange, 'Gave-up':red),
     \"Key Insight\" RICH_TEXT,
     \"Reaction\" RICH_TEXT,
+    \"Related\" RICH_TEXT,
     \"Conversation Summary\" RICH_TEXT
   )"
 )

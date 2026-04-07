@@ -56,13 +56,13 @@ notion-update-page(
 | Property | Type | 설명 | 제한 |
 |----------|------|------|------|
 | Date | Date | 생성일 | |
-| Type | Select | 인사이트 유형 | Pattern/Contradiction/Trend/Identity Signal |
-| Horizon | Select | 시간 범위 | Daily/Weekly/Monthly |
+| Type | Select | 인사이트 유형 | Pattern/Contradiction/Trend/Identity Signal/Prediction |
+| Horizon | Select | 시간 범위 | Daily/Weekly/Monthly/Quarterly |
 | Content | Rich Text | 요약 | 500자 이내. 상세는 페이지 본문 |
 | Evidence | Relation → Daily Log | 근거 | create 후 update로 설정 |
-| Confidence | Select | 확신도 | Hypothesis/Emerging/Confirmed |
+| Confidence | Select | 확신도 | Hypothesis/Emerging/Confirmed/Disconfirmed |
 | Status | Select | 상태 | New/Acknowledged/ActingOn/Superseded |
-| Tags | Multi-select | 태그 | Health/Study/Identity/Energy/Social/Career |
+| Tags | Multi-select | 태그 | Identity/Energy/Health/Study/Social/Career/Tech/Market/Industry/AI/Meta |
 
 ### Confidence 생애주기
 - **Hypothesis**: 1회 발견. 사용자에게 푸시하지 않음.
@@ -124,12 +124,13 @@ notion-update-page(command="replace_content")로 전체 교체.
 |----------|------|------|------|
 | Topic | Title | 학습 주제 | |
 | Date | Date | 학습일 | |
-| Subject | Select | 과목 분류 | Algorithm/CS/Embedded/Project/Language/Other |
-| Tool | Select | 학습 도구 | Claude/Book/Video/Practice/Lecture |
+| Subject | Select | 과목 분류 | CS/Algorithm/Embedded/Vision/Project/Other |
+| Tool | Select | 학습 도구 | Claude/ChatGPT/Gemini/Notion/Self |
 | Duration | Number | 학습 시간 (분) | |
 | Confidence | Number | 이해도 | 1-5 정수 |
 | Difficulty | Number | 체감 난이도 | 1-5 정수 |
-| Flow | Number | 몰입도 | 1-5 정수 |
+| Flow | Select | 몰입 상태 | Engaged/Neutral/Struggled/Gave-up |
+| Related | Rich Text | 연결되는 다른 주제 | 2,000자 이내 |
 | Key Insight | Rich Text | 핵심 1문장 (자기 말로) | 2,000자 이내 |
 | Reaction | Rich Text | 학습 후 느낀 점/반응 | 2,000자 이내 |
 | Conversation Summary | Rich Text | 대화 요약 (claude.ai 앱 세션) | 2,000자 이내 |

@@ -117,6 +117,115 @@ notion-update-page(page_id="NEW_INSIGHT_PAGE_ID", command="update_properties",
 DB가 아닌 단독 Notion 페이지. /setup 시 생성.
 notion-update-page(command="replace_content")로 전체 교체.
 
+## Learning Log DB
+
+### 스키마
+| Property | Type | 설명 | 제한 |
+|----------|------|------|------|
+| Topic | Title | 학습 주제 | |
+| Date | Date | 학습일 | |
+| Subject | Select | 과목 분류 | Algorithm/CS/Embedded/Project/Language/Other |
+| Tool | Select | 학습 도구 | Claude/Book/Video/Practice/Lecture |
+| Duration | Number | 학습 시간 (분) | |
+| Confidence | Number | 이해도 | 1-5 정수 |
+| Difficulty | Number | 체감 난이도 | 1-5 정수 |
+| Flow | Number | 몰입도 | 1-5 정수 |
+| Key Insight | Rich Text | 핵심 1문장 (자기 말로) | 2,000자 이내 |
+| Reaction | Rich Text | 학습 후 느낀 점/반응 | 2,000자 이내 |
+| Conversation Summary | Rich Text | 대화 요약 (claude.ai 앱 세션) | 2,000자 이내 |
+
+### MCP 호출 패턴
+```
+# 학습 기록 생성
+notion-create-pages(
+  parent={data_source_id: "LEARNING_LOG_DS_ID"},
+  pages=[{properties: {
+    "Topic": "TCP 3-way Handshake",
+    "date:Date:start": "2026-04-07",
+    "Subject": "CS",
+    "Tool": "Claude",
+    "Duration": 45,
+    "Confidence": 3,
+    "Difficulty": 3,
+    "Flow": 4,
+    "Key Insight": "SYN-ACK는 서버가 연결을 수락했다는 의미",
+    "Reaction": "네트워크 계층 구조가 점점 보이기 시작"
+  }}]
+)
+
+# 최근 학습 검색
+notion-search(
+  query="",
+  data_source_url="collection://LEARNING_LOG_DS_ID",
+  filters={created_date_range: {start_date: "YYYY-MM-DD", end_date: "YYYY-MM-DD"}},
+  page_size=25
+)
+```
+
+## Curriculum DB
+
+### 스키마
+| Property | Type | 설명 | 제한 |
+|----------|------|------|------|
+| Topic | Title | 학습 항목명 | |
+| Subject | Select | 과목 분류 | Algorithm/CS/Embedded/Project/Language |
+| Type | Select | Tier 구분 | Tier1-Core/Tier2-Advanced/Tier3-Explore |
+| Order | Number | 학습 순서 | |
+| Status | Select | 진행 상태 | NotStarted/InProgress/Review/Mastered |
+| Mastery | Number | 숙련도 | 1-5 정수 |
+| Next Review | Date | 다음 복습일 (Spaced Repetition) | |
+| Review Count | Number | 복습 횟수 | |
+| Parent Week | Text | 소속 주차 | "W1", "W2" 등 |
+| Algorithm Tag | Multi-select | 알고리즘 카테고리 | Array/String/Stack/Queue/Tree/Graph/DP/Greedy/Sort/Search/Hash/BFS/DFS |
+| Difficulty | Select | 문제 난이도 | Bronze/Silver/Gold/Platinum |
+| Platform | Select | 문제 출처 | BOJ/Programmers/LeetCode/SWEA |
+| Problem ID | Text | 문제 번호 | |
+| Language | Select | 풀이 언어 | Python/Java/C/C++ |
+| Solved | Checkbox | 풀이 완료 여부 | |
+| Solve Time | Number | 풀이 시간 (분) | |
+
+### MCP 호출 패턴
+```
+# 커리큘럼 항목 생성 (일괄)
+notion-create-pages(
+  parent={data_source_id: "CURRICULUM_DS_ID"},
+  pages=[{properties: {
+    "Topic": "배열 기초",
+    "Subject": "Algorithm",
+    "Type": "Tier1-Core",
+    "Order": 1,
+    "Status": "NotStarted",
+    "Mastery": 0,
+    "Parent Week": "W1",
+    "Algorithm Tag": "Array"
+  }}]
+)
+
+# 문제 풀이 기록
+notion-create-pages(
+  parent={data_source_id: "CURRICULUM_DS_ID"},
+  pages=[{properties: {
+    "Topic": "BOJ 1920 수 찾기",
+    "Subject": "Algorithm",
+    "Type": "Tier1-Core",
+    "Algorithm Tag": "Search, Hash",
+    "Difficulty": "Silver",
+    "Platform": "BOJ",
+    "Problem ID": "1920",
+    "Language": "Python",
+    "Solved": true,
+    "Solve Time": 25
+  }}]
+)
+
+# 복습 대상 검색 (Mastery < 3)
+notion-search(
+  query="",
+  data_source_url="collection://CURRICULUM_DS_ID",
+  page_size=25
+)
+```
+
 ## 일반 규칙
 - 쿼리 시 항상 date-range 필터 사용 (전체 스캔 금지)
 - Rich Text property는 2,000자 제한. 초과 시 page body 사용.

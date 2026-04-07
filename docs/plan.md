@@ -2,12 +2,14 @@
 
 ## 실행 순서
 
-### Phase A: 시스템 검증 (CLI)
+### Phase A: 시스템 검증 (CLI) + 학습 DB
 1. `/setup` 실행 — Notion DB 생성, 뷰, Calendar 리마인더, ID 저장
 2. `/abyss` 실행 — life_design.md 검증 + 심층 탐색 (45-60분)
 3. `/daily` 3-5일 운영 — 파싱, Gap 계산, Notion 기록 안정성 확인
 4. `/pulse weekly` 1회 — 분석 품질 + 4경로 검증 기반 확보
 5. Abyss 신뢰도 판정 — 행동 예측 + 사전인지도 기록 확인
+6. ✅ Learning Log DB 추가 (Notion) — 학습 세션 상세 기록
+7. ✅ Curriculum DB 추가 (Notion) — 3-Tier 커리큘럼 + 알고리즘 숙련도 추적
 
 ### Phase B: 모바일화 (검증 완료 후)
 6. Telegram 봇 설계 + 개발 (2-3일)
@@ -15,10 +17,9 @@
 8. CLI = 깊은 작업 (Abyss, 시스템 수정), Telegram = 일상 운영
 
 ### Phase C: 기법 통합 (안정화 후)
-9. Learning Log DB 추가 (Notion)
-10. PULSE에 Pareto 분석 + 학습 연결 분석 추가
-11. Time Boxing + Atomic Habits 적용
-12. Spaced Repetition 도입 (선택)
+9. PULSE에 Pareto 분석 + 학습 연결 분석 추가
+10. Time Boxing + Atomic Habits 적용
+11. Spaced Repetition 도입 (선택)
 
 ---
 
@@ -135,7 +136,8 @@ Notion (데이터 허브, 모바일 확인)
 ├── Daily Log DB
 ├── Insights DB (+ Prediction, Trend, Meta)
 ├── Goals & Direction DB
-├── Learning Log DB (Phase C)
+├── Learning Log DB
+├── Curriculum DB
 ├── Identity Profile 페이지
 └── System Config 페이지
 ```

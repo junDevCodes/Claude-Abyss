@@ -53,6 +53,15 @@ gcal_list_events(
 
 ## Step 3: 파싱 규칙
 
+### Activities vs Learning Log
+- Activities (Daily Log) = 오늘 한 활동 요약 (간단 기록)
+- Learning Log DB = 학습 세션 상세 기록 (claude.ai 앱에서 자동)
+- 둘은 별개. /daily에서는 Activities만 기록.
+
+### Ghost 엔트리
+Source="Ghost" = 사용자가 보고하지 않은 날. /pulse가 자동 생성.
+Ghost 엔트리는 스트릭을 끊음. 공백 자체가 무의식 패턴 데이터.
+
 ### Calendar 이벤트 기반 (자동)
 - 이벤트 있고 + 사용자가 "안 함/못함" 언급 안 함 → Activities에 완료로 기록
 - 이벤트 있고 + "안 함/못함" 언급 → Activities에 미완료 + Avoided에 추가

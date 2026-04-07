@@ -51,7 +51,8 @@
 ## 모드 라우팅
 - `/setup` → 초기 DB/뷰 생성 + Calendar 설정
 - `/abyss` → Abyss 에이전트 스폰 (.claude/agents/abyss.md)
-- `/daily` → 단일 자유입력 → Notion Daily Log 기록 (질문 금지, 파싱만)
+- `/morning` → Goals + Calendar + 숙련도 기반 오늘 브리핑 + 알고리즘 문제 생성
+- `/daily` → Calendar 교차 검증 + 마무리 대화 (질문 금지, 파싱만)
 - `/pulse [daily|weekly|monthly]` → docs/pulse-runbook.md 읽고 실행
 - `/review [today|week|month]` → Notion 읽기 → 상태/회고 표시
 - `/goals` → Goals DB CRUD
@@ -79,6 +80,8 @@
 | Plan-Reality Gap | Rich Text (PULSE 자동) |
 | Source | Select: Manual/Auto/Ghost |
 
+Ghost = 사용자가 보고하지 않은 날. PULSE가 자동 생성. 공백 자체가 패턴 데이터.
+
 ### Insights
 | Property | Type |
 |----------|------|
@@ -103,6 +106,43 @@
 | Next Milestone | Text |
 | Started | Date |
 | Last Touched | Date |
+
+### Learning Log (학습 세션별 기록)
+| Property | Type |
+|----------|------|
+| Topic | Title |
+| Date | Date |
+| Subject | Select: CS/Algorithm/Embedded/Vision/Project/Other |
+| Tool | Select: Claude/ChatGPT/Gemini/Notion/Self |
+| Duration | Number (분) |
+| Confidence | Number (1-5) |
+| Difficulty | Number (1-5) |
+| Flow | Select: Engaged/Neutral/Struggled/Gave-up |
+| Key Insight | Rich Text |
+| Reaction | Rich Text |
+| Conversation Summary | Rich Text |
+
+### Curriculum (학습 순서 + 진행 추적)
+| Property | Type |
+|----------|------|
+| Topic | Title (번호 포함: "1.1 CPU 기초") |
+| Subject | Select: CS/Algorithm/Embedded/Vision |
+| Type | Select: Concept/Problem/Legacy |
+| Order | Number (CS: 1.x~3.x, Algo: 10.x~30.x) |
+| Status | Select: Not Started/In Progress/Completed/Skipped |
+| Mastery | Select: New/Learning/Review/Mastered |
+| Next Review | Date (1-3-7-14-30일 간격 반복) |
+| Review Count | Number |
+| Parent Week | Text (Tier1/2/3 + 대주제) |
+| Algorithm Tag | Multi-select (구현/DP/BFS·DFS/그래프/...) |
+| Difficulty | Select (Bronze~Platinum, Easy/Medium/Hard) |
+| Platform | Select (BOJ/SWEA/LeetCode/Programmers) |
+| Problem ID | Text |
+| Language | Multi-select (Python/C/C++) |
+| Solved | Checkbox |
+| Solve Time | Number (분) |
+
+Concept = 개념 학습 항목 (소크라테스+파인만). Problem = /morning이 당일 숙련도 기반 동적 생성.
 
 ## 부트스트랩 (어디서든 동작하기 위한 핵심)
 Notion이 유일한 진실의 원천. Claude 메모리는 캐시일 뿐.
@@ -143,6 +183,8 @@ Notion이 유일한 진실의 원천. Claude 메모리는 캐시일 뿐.
 - notion-create-pages: 최대 100페이지 일괄 생성 가능
 - Relation 설정: create 후 update로 분리 필요할 수 있음 (런타임 테스트)
 - Hook은 MCP 호출 불가 — 텍스트 리마인더만
+- Multi-select: 쉼표 구분 문자열 ("Python, C++")
+- notion-search: 시맨틱 검색. 정확한 속성값 매칭 아님. 결과 검증 필수.
 
 ## 데이터 정책 — Notion이 유일한 진실의 원천
 | 데이터 | Notion (진실) | Claude 메모리 (캐시) |
@@ -151,6 +193,7 @@ Notion이 유일한 진실의 원천. Claude 메모리는 캐시일 뿐.
 | 정체성 프로필 | Identity Profile 페이지 | 캐시 (없어도 됨) |
 | PULSE 관찰 지침 | System Config 페이지 | 캐시 (없어도 됨) |
 | 사용자 설정 | System Config 페이지 | 캐시 (없어도 됨) |
+| 알고리즘 숙련도 | System Config 페이지 | 캐시 (없어도 됨) |
 | 일일 로그/인사이트/목표 | 각 DB | 저장 안 함 |
 
 - **어떤 기기에서든**: 레포 클론 → /setup → Notion에서 System Config 검색 → 자동 재연결

@@ -49,12 +49,25 @@ Test 7: Goals DB
 Test 8: Identity Profile
   notion-fetch(id=IDENTITY_PROFILE_PAGE_ID)
   → 페이지 접근 가능 + 5개 섹션 존재
+
+Test 9: Learning Log DB
+  notion-fetch(id=LEARNING_LOG_DB_ID)
+  → 스키마에 Topic, Date, Subject, Tool, Duration, Confidence,
+    Difficulty, Flow, Key Insight, Reaction, Conversation Summary 존재 확인
+  → 전부 있음 = ✅, 누락 = ⚠️ (누락 필드 명시)
+
+Test 10: Curriculum DB
+  notion-fetch(id=CURRICULUM_DB_ID)
+  → 스키마에 Topic, Subject, Type, Order, Status, Mastery, Next Review,
+    Review Count, Parent Week, Algorithm Tag, Difficulty, Platform,
+    Problem ID, Language, Solved, Solve Time 존재 확인
+  → 전부 있음 = ✅, 누락 = ⚠️ (누락 필드 명시)
 ```
 
 ## Step 3: 기능 테스트
 
 ```
-Test 9: Daily Log 쓰기
+Test 11: Daily Log 쓰기
   notion-create-pages(DAILY_LOG_DS, [{
     "Name": "VERIFY-TEST",
     "date:Date:start": "2000-01-01",
@@ -63,21 +76,21 @@ Test 9: Daily Log 쓰기
   → 생성 성공 = ✅
   → 생성된 page_id 기록 (정리용)
 
-Test 10: Daily Log 검색
+Test 12: Daily Log 검색
   notion-search(query="VERIFY-TEST", data_source_url=DAILY_LOG_DS)
   → 방금 만든 엔트리 찾음 = ✅
 
-Test 11: Daily Log 수정
-  notion-update-page(page_id=Test9결과, command="update_properties",
+Test 13: Daily Log 수정
+  notion-update-page(page_id=Test11결과, command="update_properties",
     properties={"Mood": 5})
   → 수정 성공 = ✅
 
-Test 12: Calendar 이벤트 읽기 (기존)
+Test 14: Calendar 이벤트 읽기 (기존)
   gcal_list_events(오늘) → 이벤트 수 확인
   → 반환 = ✅ (이벤트 N개)
 
-Test 13: 테스트 데이터 정리
-  notion-update-page(Test9 page, "update_properties",
+Test 15: 테스트 데이터 정리
+  notion-update-page(Test11 page, "update_properties",
     properties={"Name": "VERIFY-TEST-CLEANED"})
   → (완전 삭제 불가하므로 이름 변경으로 표시)
 ```
@@ -109,6 +122,8 @@ notion-update-page 또는 notion-create-pages:
     | Insights 스키마 | ✅ (10개 필드) |
     | Goals 스키마 | ✅ (9개 필드) |
     | Identity Profile | ✅ |
+    | Learning Log 스키마 | ✅ (11개 필드) |
+    | Curriculum 스키마 | ✅ (16개 필드) |
 
     ## 기능
     | 테스트 | 결과 |
@@ -118,7 +133,7 @@ notion-update-page 또는 notion-create-pages:
     | Daily Log 수정 | ✅ |
     | Calendar 읽기 | ✅ (N개 이벤트) |
 
-    ## 종합: 13/13 통과 ✅
+    ## 종합: 15/15 통과 ✅
     
     ## 운영 현황 (자동 업데이트)
     | 항목 | 값 |
@@ -136,7 +151,7 @@ notion-update-page 또는 notion-create-pages:
 
 ```
 "검증 완료. Notion 'System Status' 페이지에서 결과 확인 가능.
- 총 13/13 통과. (또는 N개 실패 — 실패 항목 표시)"
+ 총 15/15 통과. (또는 N개 실패 — 실패 항목 표시)"
 ```
 
 ---

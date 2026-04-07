@@ -97,8 +97,9 @@ System Config 페이지에 모든 ID/설정 저장.
 - 제외: GTD, Deep Work(엄격), Eat the Frog, PARA(풀)
 - 근거: 마감 드리븐 + 도파민 구조에 맞는 기법만
 
-## 지식 관리 (Phase C)
-- 지금: Learning Log DB (5열, 경량)
+## 지식 관리 (Phase A — 운영 중)
+- Learning Log DB: 학습 세션 상세 기록 (claude.ai 앱에서 자동)
+- Curriculum DB: 3-Tier 커리큘럼 + 알고리즘 숙련도 추적
 - 나중 (노트 500+개): 임베딩/지식 그래프 검토
 - 상세: docs/plan.md
 
@@ -119,10 +120,23 @@ System Config 페이지에 모든 ID/설정 저장.
 - command 타입 = MCP 호출 불가, 텍스트 리마인더만
 
 ## 실행 계획 (Phase A/B/C)
-- Phase A: CLI 검증 (setup→abyss→daily→pulse) ← 현재
+- Phase A: CLI 검증 (setup→abyss→daily→pulse) + Learning Log/Curriculum DB ← 현재
 - Phase B: Telegram 모바일화
-- Phase C: 라이프 해킹 기법 + 지식 관리 통합
+- Phase C: 라이프 해킹 기법 통합 (Time Boxing, Atomic Habits, Pareto, Spaced Repetition)
 - 상세: docs/plan.md
+
+## 커리큘럼 재설계 (3-Tier 구조)
+SSAFY 6월 종료 대비 학습 체계. Curriculum DB로 관리.
+
+### 구조
+- **Tier 1: 핵심 개념 (100개)** — 반드시 마스터. CS 기초 + 알고리즘 + 임베디드
+- **Tier 2: 심화** — Tier 1 완료 후 확장
+- **Tier 3: 탐색** — 관심 기반 자유 학습
+
+### 알고리즘 숙련도 추적
+- Curriculum DB에 Algorithm Tag, Platform, Problem ID, Solved, Solve Time 필드
+- 문제 풀이 기록을 통해 약점 영역 자동 식별
+- PULSE weekly에서 알고리즘 카테고리별 숙련도 분석
 
 ## 파일 구조
 ```
@@ -135,7 +149,7 @@ life_design.md                — 사용자 자기분석 (참고용)
   hooks/context-loader/       — 세션 시작 리마인더
   settings.json               — 훅 + 권한
 docs/
-  schema.md                   — DB 스키마 + MCP 패턴
+  schema.md                   — DB 스키마 + MCP 패턴 (5 DBs)
   pulse-runbook.md            — PULSE 매뉴얼 (무의식 추론 + 외부 스캔)
   dialogue-runbook.md         — DIALOGUE 매뉴얼
   metrics.md                  — 평가 지표 + 4경로 검증

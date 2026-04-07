@@ -88,6 +88,55 @@ notion-create-database(
 → Connected Insights relation에 Step 2-2의 Insights data_source_id 사용.
 → Goals의 database_id, data_source_id 기록.
 
+### 2-4. Learning Log DB
+```
+notion-create-database(
+  parent: {page_id: "PAGE_ID"},
+  title: "Learning Log",
+  schema: "CREATE TABLE (
+    \"Topic\" TITLE,
+    \"Date\" DATE,
+    \"Subject\" SELECT('Algorithm':blue, 'CS':purple, 'Embedded':green, 'Project':orange, 'Language':yellow, 'Other':gray),
+    \"Tool\" SELECT('Claude':purple, 'Book':blue, 'Video':red, 'Practice':green, 'Lecture':yellow),
+    \"Duration\" NUMBER,
+    \"Confidence\" NUMBER,
+    \"Difficulty\" NUMBER,
+    \"Flow\" NUMBER,
+    \"Key Insight\" RICH_TEXT,
+    \"Reaction\" RICH_TEXT,
+    \"Conversation Summary\" RICH_TEXT
+  )"
+)
+```
+→ Learning Log의 database_id, data_source_id 기록.
+
+### 2-5. Curriculum DB
+```
+notion-create-database(
+  parent: {page_id: "PAGE_ID"},
+  title: "Curriculum",
+  schema: "CREATE TABLE (
+    \"Topic\" TITLE,
+    \"Subject\" SELECT('Algorithm':blue, 'CS':purple, 'Embedded':green, 'Project':orange, 'Language':yellow),
+    \"Type\" SELECT('Tier1-Core':red, 'Tier2-Advanced':orange, 'Tier3-Explore':yellow),
+    \"Order\" NUMBER,
+    \"Status\" SELECT('NotStarted':gray, 'InProgress':blue, 'Review':yellow, 'Mastered':green),
+    \"Mastery\" NUMBER,
+    \"Next Review\" DATE,
+    \"Review Count\" NUMBER,
+    \"Parent Week\" RICH_TEXT,
+    \"Algorithm Tag\" MULTI_SELECT('Array':blue, 'String':green, 'Stack':orange, 'Queue':yellow, 'Tree':purple, 'Graph':red, 'DP':pink, 'Greedy':brown, 'Sort':gray, 'Search':blue, 'Hash':green, 'BFS':orange, 'DFS':yellow),
+    \"Difficulty\" SELECT('Bronze':brown, 'Silver':gray, 'Gold':yellow, 'Platinum':green),
+    \"Platform\" SELECT('BOJ':blue, 'Programmers':purple, 'LeetCode':orange, 'SWEA':green),
+    \"Problem ID\" RICH_TEXT,
+    \"Language\" SELECT('Python':blue, 'Java':red, 'C':gray, 'C++':purple),
+    \"Solved\" CHECKBOX,
+    \"Solve Time\" NUMBER
+  )"
+)
+```
+→ Curriculum의 database_id, data_source_id 기록.
+
 ## Step 3: Identity Profile 페이지 생성
 ```
 notion-create-pages(
@@ -195,7 +244,7 @@ notion-create-pages(
   pages: [{
     properties: {"title": "Life Hack System Config"},
     icon: "⚙️",
-    content: "## Database IDs\n- Daily Log DB: [database_id]\n- Daily Log DS: collection://[data_source_id]\n- Insights DB: [database_id]\n- Insights DS: collection://[data_source_id]\n- Goals DB: [database_id]\n- Goals DS: collection://[data_source_id]\n- Identity Profile Page: [page_id]\n- Parent Page: [parent_page_id]\n\n## Google Calendar\n- Primary Calendar: [calendar_id]\n\n## PULSE 관찰 지침\n(Abyss 실행 후 자동 업데이트)\n\n## 사용자 설정\n- Timezone: Asia/Seoul\n- 일일 리포트 시간: 23:30\n- PULSE 톤: 상황 적응형\n\n## 시스템 버전\n- 설치일: YYYY-MM-DD\n- 마지막 /pulse monthly: (미실행)"
+    content: "## Database IDs\n- Daily Log DB: [database_id]\n- Daily Log DS: collection://[data_source_id]\n- Insights DB: [database_id]\n- Insights DS: collection://[data_source_id]\n- Goals DB: [database_id]\n- Goals DS: collection://[data_source_id]\n- Learning Log DB: [database_id]\n- Learning Log DS: collection://[data_source_id]\n- Curriculum DB: [database_id]\n- Curriculum DS: collection://[data_source_id]\n- Identity Profile Page: [page_id]\n- Parent Page: [parent_page_id]\n\n## Google Calendar\n- Primary Calendar: [calendar_id]\n\n## PULSE 관찰 지침\n(Abyss 실행 후 자동 업데이트)\n\n## 사용자 설정\n- Timezone: Asia/Seoul\n- 일일 리포트 시간: 23:30\n- PULSE 톤: 상황 적응형\n\n## 시스템 버전\n- 설치일: YYYY-MM-DD\n- 마지막 /pulse monthly: (미실행)"
   }]
 )
 ```

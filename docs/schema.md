@@ -129,6 +129,6 @@ notion-update-page(command="replace_content")로 전체 교체.
 - **created_date_range는 페이지 생성일 기준**, Date property 값 기준이 아님.
   → 소급 생성 시 제목(날짜 문자열) 검색으로 우회 가능.
 - **Relation 속성**: create-pages에서 직접 설정 가능. 형식: `["https://notion.so/page_id"]`
-- **Multi-select 속성**: JSON 배열 형식 사용. `["Algorithm", "Embedded"]` (쉼마 구분 문자열 아님)
+- **Multi-select 속성**: 쉼표 구분 문자열. `"Algorithm, Embedded"` (JSON 배열 아님)
 - **notion-search는 시맨틱 검색**: 정확한 속성값 매칭이 아님. 결과 검증 필수.
 - **검색 인덱싱 지연**: 생성 직후 시맨틱 검색 수 초 지연. 키워드+date 필터 조합 사용.

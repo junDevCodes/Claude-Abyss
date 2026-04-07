@@ -136,7 +136,70 @@ Abyss 인사이트와 학습 데이터 교차:
 PULSE가 Daily Log + Learning Log + Goals + Insights 전부 교차 분석.
 ```
 
+## Curriculum DB — 학습 순서 + 진행 추적
+
+### 목적
+Claude가 "다음에 뭘 공부할지" 자동으로 파악하게 하는 구조화된 커리큘럼.
+Learning Log = "뭘 했는지", Curriculum = "뭘 해야 하는지".
+
+### 스키마
+| Property | Type | 용도 |
+|----------|------|------|
+| Topic | Title | 학습 주제 ("TCP/IP 3-way handshake") |
+| Subject | Select | CS/Algorithm/Embedded/Project |
+| Week | Number | 몇 주차 |
+| Order | Number | 과목 내 순서 (1,2,3...) |
+| Status | Select | Not Started / In Progress / Completed / Skipped |
+| Difficulty | Number (1-5) | 예상 난이도 (사전 설정) |
+| Est Minutes | Number | 예상 소요 시간 |
+| Completed Date | Date | 완료일 (자동) |
+| Learning Log | Relation → Learning Log | 해당 학습 기록 연결 |
+| Notes | Rich Text | 메모/참고 자료 |
+
+### 초기 데이터 (life_design.md 기반)
+
+**CS 커리큘럼 (7.5주):**
+| Topic | Week | Order |
+|-------|------|-------|
+| 컴퓨터 구조 — CPU, 메모리, 캐시 | 1 | 1 |
+| 운영체제 — 프로세스, 스레드, 데드락 | 2 | 2 |
+| 네트워크 — TCP/IP, HTTP, DNS | 3 | 3 |
+| 데이터베이스 — 인덱스, 정규화, 트랜잭션 | 4 | 4 |
+| 자료구조 — 배열, 링크드리스트, 트리, 해시 | 5 | 5 |
+| 웹 동작 원리 — URL→화면 전체 흐름 | 6 | 6 |
+| 디자인 패턴 — MVC, 싱글톤, REST API | 7 | 7 |
+| 복습 + 면접 빈출 정리 | 7.5 | 8 |
+
+**알고리즘 커리큘럼 (7.5주):**
+| Topic | Week | Order |
+|-------|------|-------|
+| 배열/문자열 기초 | 1-2 | 1 |
+| 해시맵/딕셔너리 | 3-4 | 2 |
+| 스택/큐 | 5-6 | 3 |
+| 이진탐색, 투포인터 | 7-7.5 | 4 |
+
+### Claude 앱에서의 자동 흐름
+```
+"공부하자"
+  ↓
+Curriculum DB 읽기 (notion-search)
+  → Subject별 Status="Not Started" OR "In Progress" 중 Order 최소
+  ↓
+Learning Log 읽기
+  → 해당 Topic의 세부 완료 상황
+  ↓
+"오늘 할 건 [Topic]이야. 시작할까?"
+  ↓
+학습 진행
+  ↓
+완료 시 자동:
+  → Learning Log에 기록 (notion-create-pages)
+  → Curriculum Status 업데이트 (notion-update-page)
+  → "다음은 [다음 Topic]. 계속할래?"
+```
+
 ## /setup에서 생성
 
-Learning Log DB는 /setup 시 자동 생성.
-기존 시스템에 DB 1개만 추가. 스키마 위 참조.
+Learning Log DB + Curriculum DB를 /setup 시 자동 생성.
+Curriculum 초기 데이터는 life_design.md 기반으로 자동 시드.
+사용자가 커리큘럼 수정 가능 (Notion에서 직접 또는 대화로).
